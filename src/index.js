@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import {List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import TimelapseIcon from '@mui/icons-material/Timelapse';
 
 function Square(props) {
     return (
@@ -88,9 +90,12 @@ class Game extends React.Component {
                'Go to move #' + move :
                'Go to game start';
            return (
-               <li key={move}>
-                   <button onClick={()=> this.jumpTo(move)}>{desc}</button>
-               </li>
+               <ListItemButton key={move} variant="contained" onClick={()=> this.jumpTo(move)}>
+                   <ListItemIcon disableGutters>
+                       <TimelapseIcon disableGutters />
+                   </ListItemIcon>
+                   {desc}
+               </ListItemButton>
            );
         });
 
@@ -110,8 +115,10 @@ class Game extends React.Component {
                     />
                 </div>
                 <div className="game-info">
-                    <div>{status}</div>
-                    <ol>{moves}</ol>
+                    <List>
+                        <ListItemText>{status}</ListItemText>
+                        {moves}
+                    </List>
                 </div>
             </div>
         );
